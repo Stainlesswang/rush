@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.*;
 
+/**
+ * 实现一个抢购的实例
+ */
 @RestController
 public class RushBuyController {
 
@@ -37,6 +40,7 @@ public class RushBuyController {
         logger.info("减1000次后的值为:{}",redisTemplate.opsForValue().get("allen"));
 
         logger.info("request In:"+request.getRequestURI());
+        redisTemplate.opsForValue().setIfAbsent("allen","fuck",10,TimeUnit.SECONDS);
         return "hello world"+redisTemplate.opsForValue().get("allen");
     }
 }
