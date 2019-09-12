@@ -27,6 +27,7 @@ public class RushBuyController {
         this.redisTemplate = redisTemplate;
     }
 
+
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String test(HttpServletRequest request){
         redisTemplate.opsForValue().set("allen","1000");
