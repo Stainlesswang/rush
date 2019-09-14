@@ -1,5 +1,8 @@
 package allen.api.rush.controller;
 
+import allen.api.rush.distributedLock.RedisLockClient;
+import allen.api.rush.distributedLock.annotation.DistributedLockable;
+import allen.api.rush.model.AnyObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class RushBuyController {
 
     private Logger logger = LoggerFactory.getLogger(RushBuyController.class);
 
+    @Autowired
+    RedisLockClient lockClient;
+
     private final
     RedisTemplate<String, String> redisTemplate;
 
@@ -29,19 +35,11 @@ public class RushBuyController {
 
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
-    public String test(HttpServletRequest request){
-        redisTemplate.opsForValue().set("allen","1000");
-        Boolean flag=redisTemplate.opsForValue().setIfAbsent("allen","1000");
-        logger.info("setIfAbsent:{}",flag);
-
-        ExecutorService executorService=Executors.newCachedThreadPool();
-        for (int i = 0; i <1000 ; i++) {
-            executorService.execute(()-> redisTemplate.opsForValue().decrement("allen",1));
-        }
-        logger.info("减1000次后的值为:{}",redisTemplate.opsForValue().get("allen"));
-
-        logger.info("request In:"+request.getRequestURI());
-        redisTemplate.opsForValue().setIfAbsent("allen","fuck",10,TimeUnit.SECONDS);
-        return "hello world"+redisTemplate.opsForValue().get("allen");
+    public String test(HttpServletRequest request) throws Throwable {
+        AnyObject object=lockClient.tryLock("allen", () -> {
+            System.out.println("running");
+            return new AnyObject(11L,"allen");
+        }, 400000, true, 2, 1000, RuntimeException.class);
+        return object.getName();
     }
 }
