@@ -33,7 +33,10 @@ public class RedisDistributedLock extends DistributedLock {
     @Override
     public void release() {
         List<String> keys = Collections.singletonList(key);
-        operations.execute(new DefaultRedisScript<String>(COMPARE_AND_DELETE), keys,value);
+        DefaultRedisScript<Boolean> redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptText(COMPARE_AND_DELETE);
+        redisScript.setResultType(Boolean.class);
+        operations.execute(redisScript, keys,value);
     }
 
     @Override

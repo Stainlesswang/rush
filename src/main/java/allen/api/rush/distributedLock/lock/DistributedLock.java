@@ -18,7 +18,7 @@ public abstract class DistributedLock implements AutoCloseable{
 
     @Override
     public void close() {
-        LOG.debug("distributed lock close , {}", this.toString());
+        LOG.info("distributed lock close , {}", this.toString());
         this.release();
     }
 }

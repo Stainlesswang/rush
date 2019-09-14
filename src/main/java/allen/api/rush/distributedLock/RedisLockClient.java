@@ -1,6 +1,5 @@
 package allen.api.rush.distributedLock;
 
-import allen.api.rush.distributedLock.annotation.DistributedLockable;
 import allen.api.rush.distributedLock.handler.LockHandler;
 import allen.api.rush.distributedLock.lock.DistributedLock;
 import allen.api.rush.distributedLock.lock.RedisDistributedLock;
@@ -10,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +16,6 @@ import java.util.concurrent.TimeUnit;
  * @author AllenWong
  * @date 2019/9/14 2:10 PM
  */
-@Component
 public class RedisLockClient {
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
@@ -33,9 +30,9 @@ public class RedisLockClient {
                 return handler.handle();
             }
             LOGGER.info("get lock fail, key: {}", key);
-            if (null != onFailure) {
-                throw onFailure.newInstance();
-            }
+//            if (null != onFailure) {
+//                throw onFailure.newInstance();
+//            }
             return null;
         }
     }
