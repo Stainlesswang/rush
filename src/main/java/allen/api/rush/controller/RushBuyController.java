@@ -27,7 +27,7 @@ import java.util.concurrent.*;
 public class RushBuyController {
 
     private Logger logger = LoggerFactory.getLogger(RushBuyController.class);
-    private static final ExecutorService POOL = Executors.newFixedThreadPool(32);
+    private static final ExecutorService POOL = Executors.newFixedThreadPool(16);
 
     @Autowired
     DistributedLockableService distributedLockableService;
@@ -40,9 +40,9 @@ public class RushBuyController {
 
         List<Future<Long>> list = new ArrayList<>();
 
-        for (int index = 0; index < 100; index++) {
+        for (int index = 0; index < 10; index++) {
             list.add(POOL.submit(() ->
-                    distributedLockableService.distributedLockable(anyObject, "str", "str", 20L)
+                    distributedLockableService.distributedLockableOnFaiFailure(anyObject, "str", "str", 20L)
             ));
         }
 

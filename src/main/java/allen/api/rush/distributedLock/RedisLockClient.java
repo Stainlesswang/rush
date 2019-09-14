@@ -1,5 +1,6 @@
 package allen.api.rush.distributedLock;
 
+import allen.api.rush.distributedLock.annotation.DistributedLockable;
 import allen.api.rush.distributedLock.handler.LockHandler;
 import allen.api.rush.distributedLock.lock.DistributedLock;
 import allen.api.rush.distributedLock.lock.RedisDistributedLock;
@@ -30,9 +31,9 @@ public class RedisLockClient {
                 return handler.handle();
             }
             LOGGER.info("get lock fail, key: {}", key);
-//            if (null != onFailure) {
-//                throw onFailure.newInstance();
-//            }
+            if (null != onFailure && onFailure != DistributedLockable.NoException.class) {
+                throw onFailure.newInstance();
+            }
             return null;
         }
     }

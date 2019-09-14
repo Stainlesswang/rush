@@ -46,7 +46,7 @@ public class DistributedLockableAspect implements KeyGenerator {
     @Around(value = "distributedLockable() && @annotation(lockable)")
     public Object around(ProceedingJoinPoint joinPoint, DistributedLockable lockable) throws Throwable {
 
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
         final String key = this.generate(joinPoint, lockable.prefix(), lockable.argNames(), lockable.argsAssociated()).toString();
 
         Object result = redisLockClient.tryLock(
@@ -56,8 +56,8 @@ public class DistributedLockableAspect implements KeyGenerator {
                 lockable.onFailure()
         );
 
-        long end = System.nanoTime();
-        LOGGER.debug("distributed lockable cost: {} ns", end - start);
+        long end = System.currentTimeMillis();
+        LOGGER.info("distributed lockable cost: {} ns", end - start);
 
         return result;
     }

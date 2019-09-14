@@ -27,7 +27,7 @@ public class RedisConfig implements ImportAware {
     /**
      *
      * @author AllenWong
-     * @date 2019-09-14 19:47:55 
+     * @date 2019-09-14 20:42:55
      * @param 
      * @return allen.api.rush.distributedLock.aspect.DistributedLockableAspect
      */ 
