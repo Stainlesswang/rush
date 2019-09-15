@@ -17,6 +17,7 @@ import java.util.concurrent.*;
 import static org.junit.Assert.*;
 
 /**
+ * 对service层的代码写测试用例,测试多个线程池模拟多个用户并发的场景
  * @author AllenWong
  * @date 2019/9/14 9:10 PM
  */
@@ -30,7 +31,7 @@ public class DistributedLockableServiceTest {
     private DistributedLockableService distributedLockableService;
 
     /**
-     * @author piaoruiqing
+     * @author AllenWong
      *
      * @throws InterruptedException
      * @throws ExecutionException
@@ -60,7 +61,7 @@ public class DistributedLockableServiceTest {
     }
 
     /**
-     * @author piaoruiqing
+     * @author AllenWong
      *
      * @throws InterruptedException
      * @throws ExecutionException

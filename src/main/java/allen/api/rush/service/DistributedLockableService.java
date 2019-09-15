@@ -17,7 +17,7 @@ public class DistributedLockableService {
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
     /**
-     * @author piaoruiqing
+     * @author AllenWong
      *
      * @param anyObject
      * @param param1
@@ -41,7 +41,7 @@ public class DistributedLockableService {
     }
 
     /**
-     * @author piaoruiqing
+     * @author AllenWong
      *
      * @param anyObject
      * @param param1

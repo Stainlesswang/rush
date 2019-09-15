@@ -26,7 +26,7 @@ public interface KeyGenerator {
     };
 
     /**
-     * @author piaoruiqing
+     * @author AllenWong
      *
      * @param joinPoint
      * @param prefix
