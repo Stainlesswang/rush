@@ -14,7 +14,7 @@ import org.springframework.core.type.AnnotationMetadata;
 @Configuration
 public class RedisConfig implements ImportAware {
     /**
-     *
+     * 注册RedisLockClient实例
      * @author AllenWong
      * @date 2019-09-14 19:47:48 
      * @param 
@@ -25,7 +25,7 @@ public class RedisConfig implements ImportAware {
         return new RedisLockClient();
     }
     /**
-     *
+     * 定义注解使用的切面
      * @author AllenWong
      * @date 2019-09-14 20:42:55
      * @param 

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 继承实现了自动关闭的分布式锁
  * @author AllenWong
  * @date 2019/9/14 1:41 PM
  */
@@ -14,7 +15,7 @@ public class RedisDistributedLock extends DistributedLock {
     private RedisOperations<String, String> operations;
     private String key;
     private String value;
-    //比较并删除对应的redis key,使用Lua脚本语言执行,保证两个操作的原子性
+    //比较并删除对应的redis key,使用Lua脚本语言执行,保证两个操作(比较值是否相同 删除key)的原子性
     private static final String COMPARE_AND_DELETE =
             "if redis.call('get',KEYS[1]) == ARGV[1]\n" +
                     "then\n" +
@@ -29,12 +30,15 @@ public class RedisDistributedLock extends DistributedLock {
         this.value = value;
     }
 
-
+    /**
+     * 实现关闭方法,确保分布式锁创建后自动释放锁资源
+     */
     @Override
     public void release() {
         List<String> keys = Collections.singletonList(key);
         DefaultRedisScript<Boolean> redisScript = new DefaultRedisScript<>();
         redisScript.setScriptText(COMPARE_AND_DELETE);
+        //设置Boolean类型的返回值
         redisScript.setResultType(Boolean.class);
         operations.execute(redisScript, keys,value);
     }

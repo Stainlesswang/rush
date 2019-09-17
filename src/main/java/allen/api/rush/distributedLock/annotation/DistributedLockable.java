@@ -4,6 +4,7 @@ import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 使用在方法上的注解,自动获取锁才执行方法
  * @author AllenWong
  * @date 2019/9/14 3:44 PM
  */

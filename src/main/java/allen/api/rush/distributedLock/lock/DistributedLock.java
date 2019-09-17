@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 分布式锁的抽象类,主要工作是实现了AutoCloseable接口,可以自动关闭资源
  * @author AllenWong
  * @date 2019/9/11 3:46 PM
  */
