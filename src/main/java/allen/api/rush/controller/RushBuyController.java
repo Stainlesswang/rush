@@ -4,15 +4,18 @@ import allen.api.rush.distributedLock.RedisLockClient;
 import allen.api.rush.distributedLock.annotation.DistributedLockable;
 import allen.api.rush.model.AnyObject;
 import allen.api.rush.service.DistributedLockableService;
+import allen.api.rush.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,10 +34,12 @@ public class RushBuyController {
 
     @Autowired
     DistributedLockableService distributedLockableService;
-
-
+    @Resource(name = "vip")
+    UserService userService;
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String test(HttpServletRequest request) throws Throwable {
+        userService.test();
+
         AnyObject anyObject =
                 new AnyObject(ThreadLocalRandom.current().nextLong(),RandomStringUtils.random(3));
 
@@ -54,5 +59,12 @@ public class RushBuyController {
         }
         return results.toString();
 
+    }
+
+
+    @RequestMapping(value = "/test2",method = RequestMethod.GET)
+    public String fuckme(){
+        userService.test();
+        return "test Success!";
     }
 }
