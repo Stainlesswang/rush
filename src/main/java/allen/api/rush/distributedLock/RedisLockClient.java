@@ -49,7 +49,7 @@ public class RedisLockClient {
      * @param waitingTime 每次重试的时候休眠等待时间
      * @return allen.api.rush.distributedLock.lock.DistributedLock 返回一个key,value以及操作的redisTemplate封装的对象
      */
-    public DistributedLock acquire(String key, long timeout, int retries, long waitingTime) throws InterruptedException {
+    private DistributedLock acquire(String key, long timeout, int retries, long waitingTime) throws InterruptedException {
         //首先根据 随机数+时间戳 获取当前的value, 尽量保证不重复即可, 用来做删除时的凭证
         String value=RandomStringUtils.randomAlphanumeric(4)+System.currentTimeMillis();
         do {

@@ -36,18 +36,25 @@ public class RushBuyController {
     DistributedLockableService distributedLockableService;
     @Resource(name = "vip")
     UserService userService;
+
+    @RequestMapping(value = "/lockAndRun",method = RequestMethod.GET)
+    public String reidsLockTest(HttpServletRequest request) throws Throwable {
+        AnyObject anyObject = new AnyObject(10L,"Allen");
+        //只有获取锁的方法才可以执行
+        Long future = distributedLockableService.distributedLockable(anyObject, "str", "str", 20L);
+        return "fuck";
+    }
+
+
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String test(HttpServletRequest request) throws Throwable {
-        userService.test();
-
-        AnyObject anyObject =
-                new AnyObject(ThreadLocalRandom.current().nextLong(),RandomStringUtils.random(3));
+        AnyObject anyObject = new AnyObject(ThreadLocalRandom.current().nextLong(),RandomStringUtils.random(3));
 
         List<Future<Long>> list = new ArrayList<>();
 
         for (int index = 0; index < 10; index++) {
             list.add(POOL.submit(() ->
-                    distributedLockableService.distributedLockableOnFaiFailure(anyObject, "str", "str", 20L)
+                    distributedLockableService.distributedLockableOnFaiFailure(anyObject, "str", "str", 50L)
             ));
         }
 

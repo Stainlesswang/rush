@@ -2,7 +2,7 @@ package allen.api.rush.model;
 
 
 /**
- *
+ * 一个测试的的实体类
  */
 
 public class AnyObject {

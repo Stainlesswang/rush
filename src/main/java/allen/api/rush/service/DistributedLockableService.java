@@ -32,6 +32,7 @@ public class DistributedLockableService {
     public Long distributedLockable(AnyObject anyObject, String param1, Object param2, Long timeout) {
 
         try {
+            LOGGER.info("{}进入了方法",anyObject.getName());
             TimeUnit.SECONDS.sleep(timeout);
             LOGGER.info("distributed-lockable: " + System.nanoTime());
         } catch (InterruptedException e) {
@@ -59,7 +60,7 @@ public class DistributedLockableService {
         try {
             TimeUnit.SECONDS.sleep(timeout);
             LOGGER.info("distributed-lockable-on-failure: " + System.nanoTime());
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
 
         return System.nanoTime();
