@@ -32,17 +32,21 @@ public class RushBuyController {
     private Logger logger = LoggerFactory.getLogger(RushBuyController.class);
     private static final ExecutorService POOL = Executors.newFixedThreadPool(16);
 
-    @Autowired
+    final
     DistributedLockableService distributedLockableService;
     @Resource(name = "vip")
     UserService userService;
 
+    public RushBuyController(DistributedLockableService distributedLockableService) {
+        this.distributedLockableService = distributedLockableService;
+    }
+
     @RequestMapping(value = "/lockAndRun",method = RequestMethod.GET)
-    public String reidsLockTest(HttpServletRequest request) throws Throwable {
+    public String reidsLockTest(HttpServletRequest request){
         AnyObject anyObject = new AnyObject(10L,"Allen");
         //只有获取锁的方法才可以执行
-        Long future = distributedLockableService.distributedLockable(anyObject, "str", "str", 20L);
-        return "fuck";
+        Long future = distributedLockableService.distributedLockableOnFaiFailure(anyObject, "str", "str", 1L);
+        return future.toString();
     }
 
 
