@@ -1,5 +1,7 @@
 package allen.api.rush.service;
 
+import java.util.Map;
+
 /**
  * @author AllenWong
  * @date 2019/9/27 2:19 PM
@@ -10,5 +12,5 @@ package allen.api.rush.service;
  * 3、@Qualifier 注解可以按名称注入， 但是注意是 类名。
  */
 public interface UserService {
-    public void test();
+    public String test();
 }

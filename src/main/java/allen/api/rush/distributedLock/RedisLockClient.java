@@ -68,4 +68,8 @@ public class RedisLockClient {
 
         return null;
     }
+
+    public StringRedisTemplate getStringRedisTemplate() {
+        return stringRedisTemplate;
+    }
 }
