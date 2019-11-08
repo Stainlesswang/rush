@@ -25,6 +25,7 @@ import java.util.concurrent.*;
 
 /**
  * 实现一个抢购的实例
+ * @author wangjianqiang
  */
 @RestController
 public class RushBuyController {
@@ -32,7 +33,7 @@ public class RushBuyController {
     private Logger logger = LoggerFactory.getLogger(RushBuyController.class);
     private static final ExecutorService POOL = Executors.newFixedThreadPool(16);
 
-    final
+    private final
     DistributedLockableService distributedLockableService;
     @Resource(name = "vip")
     UserService userService;
