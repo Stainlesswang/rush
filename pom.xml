@@ -79,8 +79,24 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.52.sec06</version>
         </dependency>
-    </dependencies>
+        <!--基于redis的布隆过滤器依赖-->
+        <dependency>
+            <groupId>com.baqend</groupId>
+            <artifactId>bloom-filter</artifactId>
+            <version>1.0.7</version>
+        </dependency>
 
+    </dependencies>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+            <!--<id>central</id>-->
+            <!--<name>bintray</name>-->
+            <!--<url>http://jcenter.bintray.com</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 	<build>
 		<plugins>
 			<plugin>
