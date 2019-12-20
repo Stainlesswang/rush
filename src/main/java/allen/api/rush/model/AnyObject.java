@@ -1,6 +1,8 @@
 package allen.api.rush.model;
 
 
+import java.util.List;
+
 /**
  * 一个测试的的实体类
  */
@@ -8,6 +10,8 @@ package allen.api.rush.model;
 public class AnyObject {
     private Long id;
     private String name;
+
+    private List<SecondBean> secondBeans;
     AnyObject(){
 
     }
@@ -29,5 +33,22 @@ public class AnyObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<SecondBean> getSecondBeans() {
+        return secondBeans;
+    }
+
+    public void setSecondBeans(List<SecondBean> secondBeans) {
+        this.secondBeans = secondBeans;
+    }
+
+    @Override
+    public String toString() {
+        return "AnyObject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", secondBeans=" + secondBeans +
+                '}';
     }
 }

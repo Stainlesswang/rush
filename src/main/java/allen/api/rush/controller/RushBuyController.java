@@ -3,17 +3,17 @@ package allen.api.rush.controller;
 import allen.api.rush.distributedLock.RedisLockClient;
 import allen.api.rush.distributedLock.annotation.DistributedLockable;
 import allen.api.rush.model.AnyObject;
+import allen.api.rush.model.SecondBean;
 import allen.api.rush.service.DistributedLockableService;
 import allen.api.rush.service.UserService;
+import io.lettuce.core.dynamic.annotation.Param;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -74,9 +74,11 @@ public class RushBuyController {
     }
 
 
-    @RequestMapping(value = "/test2",method = RequestMethod.GET)
-    public String fuckme(){
+    @RequestMapping(value = "/test2",method = RequestMethod.POST)
+    public String fuckme(@RequestParam(value = "secondBeans",required = false) List<SecondBean> secondBeans){
         userService.test();
-        return "test Success!";
+        System.out.println(secondBeans);
+//        System.out.println(secondBeans.toString());
+        return "success";
     }
 }
