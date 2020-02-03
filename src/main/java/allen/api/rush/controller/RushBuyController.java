@@ -75,9 +75,9 @@ public class RushBuyController {
 
 
     @RequestMapping(value = "/test2",method = RequestMethod.POST)
-    public String fuckme(@RequestParam(value = "secondBeans",required = false) List<SecondBean> secondBeans){
+    public String fuckme(@RequestBody AnyObject anyObject){
         userService.test();
-        System.out.println(secondBeans);
+        System.out.println(anyObject);
 //        System.out.println(secondBeans.toString());
         return "success";
     }
