@@ -12,14 +12,12 @@ import java.util.Map;
  * @date 2019/9/27 2:20 PM
  */
 @Service(value = "normal")
-@Slf4j
 public class NormalUserService implements UserService {
     @Override
     public String test() {
-        log.info("Normal User Service");
         HashMap<String, String> hashMap=new HashMap<String, String>(8);
-        hashMap.put("1","allen");
-        hashMap.put("2","jack");
+        hashMap.put("2","allen");
+        hashMap.put("4","jack");
         hashMap.put("3","tom");
         return JSON.toJSONString(hashMap);
     }

@@ -16,11 +16,11 @@ import java.util.Map;
 public class VIPUserService implements UserService {
     @Override
     public String test() {
-        log.info("VIP User Service");
+
         HashMap<String, String> hashMap=new HashMap<String, String>(8);
-        hashMap.put("1","allen");
-        hashMap.put("2","jack");
-        hashMap.put("3","tom");
+        hashMap.put("6","allen");
+        hashMap.put("7","jack");
+        hashMap.put("8","tom");
         return JSON.toJSONString(hashMap);
     }
 }

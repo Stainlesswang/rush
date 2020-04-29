@@ -4,6 +4,8 @@ import allen.api.rush.distributedLock.RedisLockClient;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.lang.reflect.InvocationHandler;
@@ -17,10 +19,10 @@ import java.util.concurrent.TimeUnit;
  * 为服务里边的获取数据方法加上缓存，任何此服务的获取服务方法都要走这个缓存器
  * @author wangjianqiang
  */
-@Slf4j
 public class CacheHandler implements InvocationHandler {
     private Object target;
     private RedisLockClient redisLockClient;
+    private static Logger log=LoggerFactory.getLogger(CacheHandler.class);
 
     /**
      * 带参数的构造函数
