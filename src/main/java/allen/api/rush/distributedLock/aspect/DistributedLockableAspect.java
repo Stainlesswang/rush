@@ -50,7 +50,7 @@ public class DistributedLockableAspect implements KeyGenerator {
         final String key = this.generate(joinPoint, lockable.prefix(), lockable.argNames(), lockable.argsAssociated()).toString();
 
         Object result = redisLockClient.tryLock(
-                key, joinPoint::proceed,
+                key, joinPoint::proceed,//joinPoint::proceed 把这个方法作为一个方法传进去
                 lockable.unit().toMillis(lockable.timeout()), lockable.autoUnlock(),
                 lockable.retries(), lockable.unit().toMillis(lockable.waitingTime()),
                 lockable.onFailure()

@@ -52,8 +52,7 @@ public class DistributedLockableService {
      */
     @DistributedLockable(
             argNames = {"anyObject.id", "anyObject.name", "param1"},
-            timeout = 20, unit = TimeUnit.SECONDS,
-            onFailure = RuntimeException.class
+            timeout = 20, unit = TimeUnit.SECONDS
     )
     public Long distributedLockableOnFaiFailure(AnyObject anyObject, String param1, Object param2, Long timeout) {
 

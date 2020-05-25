@@ -35,6 +35,7 @@ public class RushBuyController {
 
     private final
     DistributedLockableService distributedLockableService;
+
     @Resource(name = "vip")
     UserService userService;
 
@@ -52,14 +53,14 @@ public class RushBuyController {
 
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
-    public String test(HttpServletRequest request) throws Throwable {
+    public  String test(HttpServletRequest request) throws Throwable {
         AnyObject anyObject = new AnyObject(ThreadLocalRandom.current().nextLong(),RandomStringUtils.random(3));
 
         List<Future<Long>> list = new ArrayList<>();
-
+        //模拟10个请求调用服务
         for (int index = 0; index < 10; index++) {
             list.add(POOL.submit(() ->
-                    distributedLockableService.distributedLockableOnFaiFailure(anyObject, "str", "str", 50L)
+                    distributedLockableService.distributedLockableOnFaiFailure(anyObject, "str", "str", 20L)
             ));
         }
 

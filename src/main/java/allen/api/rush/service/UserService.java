@@ -11,6 +11,6 @@ import java.util.Map;
  * 2、@Resource 可以通过 byName 和 byType的方式注入， 默认先按 byName的方式进行匹配，如果匹配不到，再按 byType的方式进行匹配。
  * 3、@Qualifier 注解可以按名称注入， 但是注意是 类名。
  */
-public interface UserService {
+public  interface UserService {
     public String test();
 }

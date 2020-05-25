@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            height:100%;
+            list-style-type:none;
+        }
+
+        li{
+            line-height:40px;
+            float:left;
+        }
+        .page_btn{
+            border-radius:4px;
+            border:1px solid #e5e9ef;
+            background:#fff;
+            margin-right:10px;
+            text-align:center;
+            width:38px;
+            height:38px;
+            line-height: 8px;
+            margin-top:6px;
+            outline:0;
+        }
+
+        .page_btn:hover{
+            border:1px solid #4f90fb;
+            color:#4f90fb;
+        }
+
+        span.pages_span{
+            margin-right:10px;
+            width:38px;
+            height:38px;
+            position:relative;
+            top:10px;
+        }
+    </style>
+</head>
+<body>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<div>
+    <ul>
+        <li class="page_li">
+            <button class="page_btn" style="width:100px" id="prePage" onclick="run3()">上一页</button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="page_btn1" onclick="fist()">首页</button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="p1" hidden="hidden"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="p2" hidden="hidden"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="page_btn2"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="page_btn3"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="page_btn4"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="page_btn5"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="page_btn6"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="s1" hidden="hidden"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="s2" hidden="hidden"></button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" id="page_btn7" onclick="last()">尾页</button>
+        </li>
+        <li class="page_li">
+            <button class="page_btn" style="width:100px" id="sufPage" onclick="run2()">下一页</button>
+        </li>
+    </ul>
+</div>
+
+<div>
+    当前页数<input type="text" id="currentPage" value="10"> 总页数<input type="text" id="pageNum" value="100">
+    <button onclick="run1()" id="refresh_btn">刷新并显示</button>
+</div>
+
+<script type="application/javascript">
+    //初始化
+    $(document).ready(function () {
+        run1();
+    });
+    function test() {
+        var text =$("#allen").val()
+        alert("王梓硕的Hello world:"+text)
+    }
+    function run1() {
+        var currentPage=Number( $("#currentPage").val());
+        var pageNum=Number($("#pageNum").val());
+        doss(currentPage,pageNum);
+    }
+    function run2() {
+        var currentPage=Number( $("#currentPage").val());
+        $("#currentPage").val(currentPage+1);
+        var pageNum=Number($("#pageNum").val());
+        doss(currentPage+1,pageNum);
+    }
+    function run3() {
+        var currentPage=Number( $("#currentPage").val());
+        $("#currentPage").val(currentPage-1);
+
+        var pageNum=Number($("#pageNum").val());
+        doss(currentPage-1,pageNum);
+    }
+    function fist() {
+        $("#currentPage").val(1);
+        var pageNum=Number($("#pageNum").val());
+        doss(1,pageNum);
+    }
+    function last() {
+        var pageNum=Number($("#pageNum").val());
+        $("#currentPage").val(pageNum);
+        doss(pageNum,pageNum);
+    }
+
+    /**
+     * 主要函数
+     * @param currentPage 当前页数
+     * @param pageNum 总共页数
+     */
+    function doss(currentPage,pageNum) {
+        fresh();//刷新
+        $("#page_btn2").text(currentPage-2);
+        $("#page_btn3").text(currentPage-1);
+        $("#page_btn4").text(currentPage);
+        $("#page_btn5").text(currentPage+1);
+        $("#page_btn6").text(currentPage+2);
+        // $("#page_btn7").text(pageNum);
+
+
+        $("#page_btn4").css("background-color","#4f90fb");
+        $("#page_btn4").css("border","1px solid #ddd");
+        $("#page_btn4").css("color","#fff");
+
+
+        if(currentPage==1)
+        {
+            $("#prePage").hide();
+        }
+
+        if(currentPage==pageNum)
+        {
+            $("#sufPage").hide();
+        }
+
+
+
+
+        if(currentPage<=3){
+            if (currentPage==2){
+                //隐去一个
+                $("#page_btn2").hide();
+                //判断total>4的话
+                if (pageNum>4){
+                    $("#s1").show();
+                    $("#s1").text('5');
+                }
+
+            }
+            if (currentPage==1){
+                //隐去两个
+                $("#page_btn2").hide();
+                $("#page_btn3").hide();
+                if (pageNum>3){
+                    $("#s1").show();
+                    $("#s1").text('4');
+
+                }
+                if (pageNum>4){
+                    $("#s1").show();
+                    $("#s1").text('5');
+                }
+
+            }
+        }
+
+        if(currentPage>=pageNum-2){
+            if(currentPage==pageNum)
+            {
+                //hide two
+                $("#page_btn5").hide();
+                $("#page_btn6").hide();
+                if (currentPage-2>1){
+                    $("#p2").show();
+                    $("#p2").text(currentPage-3);
+                }
+                if (currentPage-2>2){
+                    $("#p1").show();
+                    $("#p1").text(currentPage-4);
+                }
+            }
+
+            if(currentPage==pageNum-1)
+            {
+                //隐去一个
+                $("#page_btn6").hide();
+                if(currentPage-2>1){
+                    $("#p2").show();
+                    $("#p2").text(currentPage-3);
+                }
+            }
+        }
+
+
+    }
+    function　fresh() {
+        $("#page_btn2").show();
+        $("#page_btn3").show();
+        $("#page_btn4").show();
+        $("#page_btn5").show();
+        $("#page_btn6").show();
+        $("#prePage").show();
+        $("#sufPage").show();
+        $("#s1").hide();
+        $("#s2").hide();
+        $("#p1").hide();
+        $("#p2").hide();
+
+    }
+</script>
