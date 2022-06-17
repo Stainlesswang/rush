@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.52.sec06</version>
+            <version>1.2.83</version>
         </dependency>
         <!--基于redis的布隆过滤器依赖-->
         <dependency>
